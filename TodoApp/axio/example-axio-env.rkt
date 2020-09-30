@@ -11,6 +11,7 @@
          axio-smtp-server
          axio-smtp-username
          ;axio-web-app-secret
+         axio-worker-custodian
          get-app-env
          (struct-out app-env))
 
@@ -27,6 +28,11 @@
 
 ;; Commented out to ensure a proper secret is used
 ;; (define axio-web-app-secret #"replace-this-with-random-characters")
+
+;; Create a custodian outside the scope of the web server to allow
+;; worker threads to continue after the web server request has
+;; completed.
+(define axio-worker-custodian (make-custodian))
 
 (define/contract (get-app-env env-type)
   (-> symbol? app-env?)

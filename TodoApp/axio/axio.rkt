@@ -17,7 +17,8 @@
          "./axio-validation.rkt"
          "./axio-view.rkt"
          "./axio-web-ctx.rkt"
-         "./axio-web-utilities.rkt")
+         "./axio-web-utilities.rkt"
+         "./axio-worker.rkt")
 
 (provide (all-from-out "./axio-authentication.rkt"
                        "./axio-controller.rkt"
@@ -36,4 +37,5 @@
                        "./axio-validation.rkt"
                        "./axio-view.rkt"
                        "./axio-web-ctx.rkt"
-                       "./axio-web-utilities.rkt"))
+                       "./axio-web-utilities.rkt"
+                       "./axio-worker.rkt"))

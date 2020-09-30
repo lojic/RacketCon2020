@@ -24,15 +24,17 @@
   (define todo-obj (read-todo conn tid #:include-user #t #:include-comments #t))
 
   (define (notify-user recipient comment)
-    (let ([ recipient-email (user-email recipient) ])
-      (when (non-empty-string? recipient-email)
-        (send-email (user-email user)
-                    (list recipient-email)
-                    "New comment"
-                    (list
-                     "The following comment was added:"
-                     ""
-                     (comment-description comment))))))
+    (axio-worker-thread
+     (thunk
+      (let ([ recipient-email (user-email recipient) ])
+        (when (non-empty-string? recipient-email)
+          (send-email (user-email user)
+                      (list recipient-email)
+                      "New comment"
+                      (list
+                       "The following comment was added:"
+                       ""
+                       (comment-description comment))))))))
 
   (define (handle-post)
     (let* ([ attrs       (webctx-attributes ctx) ]
