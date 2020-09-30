@@ -1,0 +1,40 @@
+@(when (not (null? errors)) @`{
+<div class="errors">
+  <h1>Errors</h2>
+  <ul>
+    @,in[err errors]{
+    <li>@(cdr err)</li>
+    }
+  </ul>
+</div>
+})
+<input name="return-url" type="hidden" value="@(hash-ref attrs "return-url" "")" />
+
+<div class="input string required">
+  <label class="string control-label" for="title">Username:</label>
+  <input class="string" id="username" size="50" name="username" type="text"
+           value="@(xml-attribute-encode (hash-ref attrs "username" ""))" />
+</div>
+
+<div class="input string required">
+  <label class="string control-label" for="title">Password:</label>
+  <input class="string" id="password" size="50" name="password" type="password" value="" />
+</div>
+
+<div class="input string required">
+  <label class="string control-label" for="title">Email:</label>
+  <input class="string" id="email" size="50" name="email" type="text"
+           value="@(xml-attribute-encode (hash-ref attrs "email" ""))" />
+</div>
+
+<div>
+  <label for="is-admin">
+    <input class="checkbox" id="is-admin" name="is-admin" type="checkbox"
+           value="true" @(if (equal? "true" (hash-ref attrs "is-admin" "")) "checked" "") />
+    Admin
+  </label>
+</div>
+
+<input class="button" type="submit" value="Save">
+&nbsp;&nbsp;&nbsp;
+<a class="button" href="@(return-url-or-default attrs (url-for 'users))">Cancel</a>

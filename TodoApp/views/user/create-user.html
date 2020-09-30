@@ -1,0 +1,16 @@
+<div class="row">
+  <h3>Create User</h3>
+
+  <form accept-charset="UTF-8"
+        action="@(url-for 'create-user)"
+        method="post"
+        class="simple_form edit_todo">
+    @include-template["./_user-form.html"]
+  </form>
+</div>
+
+<script type="text/javascript">
+  jQuery(function () {
+    jQuery('#username').focus();
+  });
+</script>

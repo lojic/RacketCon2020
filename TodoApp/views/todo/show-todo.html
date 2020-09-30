@@ -1,0 +1,71 @@
+<div class="show-todo">
+  <h4>Show Todo</h4>
+
+  <div class="todo-details">
+    <div class="row">
+      <div class="two columns field-name">
+        User:
+      </div>
+      <div class="six columns">
+        @(h (user-username (todo-user-obj obj)))
+      </div>
+    </div>
+    <div class="row">
+      <div class="two columns field-name">
+        Title:
+      </div>
+      <div class="six columns">
+        @(h (todo-title obj))
+      </div>
+    </div>
+    <div class="row">
+      <div class="two columns field-name">
+        Description:
+      </div>
+      <div class="six columns">
+        @in[line (string-split (todo-description obj) "\n")]{
+        @(h line) <br>
+        }
+      </div>
+    </div>
+    <div class="row">
+      <div class="two columns field-name">
+        Created:
+      </div>
+      <div class="six columns">
+        @(~t (todo-created-at obj) "MM/dd/yy HH:mm")
+      </div>
+    </div>
+    @(when (is-completed? obj) @`{
+    <div class="row">
+      <div class="two columns field-name">
+        <strong>Completed:</strong>
+      </div>
+      <div class="six columns">
+        @,(~t (todo-completed-at obj) "MM/dd/yy HH:mm")
+      </div>
+    </div>
+    })
+    @(when (may? (get-current-user ctx) 'edit obj) @`{
+    <div class="row" style="margin-top: 10px;">
+      <div class="two columns field-name">
+        <a class="button index-button"
+           href="@,(url-for 'edit-todo
+                            (todo-id obj)
+                            (hash "return-url"
+                                  (url->string
+                                    (request-uri (webctx-request ctx)))))">Edit</a>
+      </div>
+    </div>
+    })
+  </div>
+
+  <form accept-charset="UTF-8"
+        action="@(url-for 'create-comment (todo-id obj))"
+        method="post"
+        class="simple_form add_comment_form">
+    @include-template["../comment/_comment-form.html"]
+  </form>
+</div>
+
+@include-template["../comment/_comment-list.html"]

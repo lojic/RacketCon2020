@@ -1,0 +1,26 @@
+<div class="row">
+  <h3>Login</h3>
+
+  <form accept-charset="UTF-8" action="/login" method="post">
+    <input name="return-url" type="hidden" value="@(hash-ref attrs "return-url" "")" />
+    <div class="row">
+      <div class="six columns">
+        <label for="username">User name:</label>
+        <input class="u-full-width" id="username" name="username" type="text" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="six columns">
+        <label for="password">Password:</label>
+        <input class="u-full-width" id="password" name="password" type="password" />
+      </div>
+    </div>
+    <input class="button-primary" type="submit" value="Login">
+  </form>
+</div>
+
+<script type="text/javascript">
+  jQuery(function () {
+    jQuery('#username').focus();
+  });
+</script>

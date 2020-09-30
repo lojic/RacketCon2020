@@ -1,0 +1,17 @@
+@(define flash (get-flash ctx))
+@(define info-flash (and flash (hash-ref flash 'info #f)))
+@(define error-flash (and flash (hash-ref flash 'error #f)))
+
+<div id="flash-container" class="container flash-container">
+@(when info-flash @`{
+<p class="flash-message">
+  @,info-flash
+</p>
+})
+
+@(when error-flash @`{
+<p class="flash-error">
+  @,error-flash
+</p>
+})
+</div>

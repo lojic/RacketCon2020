@@ -1,0 +1,43 @@
+@(when (not (null? errors)) @`{
+<div class="errors">
+  <h1>Errors</h2>
+  <ul>
+    @,in[err errors]{
+    <li>@(cdr err)</li>
+    }
+  </ul>
+</div>
+})
+<input name="return-url" type="hidden" value="@(hash-ref attrs "return-url" "")" />
+<div class="input string required">
+  <label class="string control-label" for="title">Title:</label>
+  <input class="string" id="title" size="50" name="title" type="text"
+           value="@(xml-attribute-encode (hash-ref attrs "title" ""))" />
+</div>
+
+<div>
+  <label for="priority">Priority:</label>
+  <select id="priority" name="priority">
+    @in[ p (map number->string todo-priorities) ]{
+    <option value="@p" @(if (equal? p
+                                    (hash-ref attrs "priority" (number->string default-priority))) "selected" "") >
+      @(format-priority (string->number p))
+    </option>
+    }
+  </select>
+</div>
+
+<div class="input string required">
+  <label class="string control-label" for="description">Description:</label>
+  <textarea class="string" id="description" rows="5" cols="49" name="description">@(xml-attribute-encode (hash-ref attrs "description" ""))</textarea>
+</div>
+<div>
+  <label for="completed">
+    <input class="checkbox" id="completed" name="completed" type="checkbox"
+           value="true" @(if (equal? "true" (hash-ref attrs "completed" "")) "checked" "") />
+    Completed
+  </label>
+</div>
+<input class="button" type="submit" value="Save">
+&nbsp;&nbsp;&nbsp;
+<a class="button" href="@(return-url-or-default attrs (url-for 'home))">Cancel</a>

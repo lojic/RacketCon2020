@@ -1,0 +1,36 @@
+<div class="delete-todo">
+  <h3>Delete Todo</h3>
+
+  <form accept-charset="UTF-8"
+        action="@(url-for 'delete-todo (todo-id obj))"
+        method="post"
+        class="simple_form delete_todo">
+    <div class="todo-details">
+      <div class="row">
+        <div class="two columns field-name">
+          Title:
+        </div>
+        <div class="six columns">
+          @(h (todo-title obj))
+        </div>
+      </div>
+      <div class="row">
+        <div class="two columns field-name">
+          Description:
+        </div>
+        <div class="six columns">
+          @in[line (string-split (todo-description obj) "\n")]{
+            @(h line) <br>
+          }
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="eight columns">
+        <input class="btn" type="submit" value="Delete?">
+        &nbsp;&nbsp;&nbsp;
+        <a href="@(url-for 'home)">Cancel</a>
+      </div>
+    </div>
+  </form>
+</div>

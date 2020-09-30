@@ -1,0 +1,34 @@
+<div class="delete-user">
+  <h3>Delete User</h3>
+
+  <form accept-charset="UTF-8"
+        action="@(url-for 'delete-user (user-id obj))"
+        method="post"
+        class="simple_form delete_user">
+    <div class="user-details">
+      <div class="row">
+        <div class="two columns field-name">
+          Username:
+        </div>
+        <div class="six columns">
+          @(h (user-username obj))
+        </div>
+      </div>
+      <div class="row">
+        <div class="two columns field-name">
+          Email:
+        </div>
+        <div class="six columns">
+          @(h (user-email obj))
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="eight columns">
+        <input class="btn" type="submit" value="Delete?">
+        &nbsp;&nbsp;&nbsp;
+        <a href="@(url-for 'users)">Cancel</a>
+      </div>
+    </div>
+  </form>
+</div>

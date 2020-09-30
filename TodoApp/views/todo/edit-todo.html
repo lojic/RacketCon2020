@@ -1,0 +1,16 @@
+<div class="row">
+  <h3>Edit Todo</h3>
+
+  <form accept-charset="UTF-8"
+        action="@(url-for 'edit-todo (todo-id obj))"
+        method="post"
+        class="simple_form edit_todo">
+    @include-template["./_todo-form.html"]
+  </form>
+</div>
+
+<script type="text/javascript">
+  jQuery(function () {
+    jQuery('#title').focus();
+  });
+</script>

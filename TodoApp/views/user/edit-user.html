@@ -1,0 +1,16 @@
+<div class="row">
+  <h3>Edit User</h3>
+
+  <form accept-charset="UTF-8"
+        action="@(url-for 'edit-user (user-id obj))"
+        method="post"
+        class="simple_form edit_todo">
+    @include-template["./_user-form.html"]
+  </form>
+</div>
+
+<script type="text/javascript">
+  jQuery(function () {
+    jQuery('#username').focus();
+  });
+</script>

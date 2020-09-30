@@ -1,0 +1,68 @@
+<div class="row">
+  <div class="twelve columns">
+    <form accept-charset="UTF-8" action="@(url-for 'home)"
+          method="get" class="index-filter-form">
+      <label class="radio inline">
+        <input id="filter-show-all" name="filter-show" type="radio"
+               value="all" @(if (equal? "all" (hash-ref attrs "filter-show" "")) "checked" "") />
+        <span class="label-body">All</span>
+      </label>
+      <label class="radio inline">
+        <input id="filter-show-active" name="filter-show" type="radio"
+               value="active" @(if (equal? "active" (hash-ref attrs "filter-show" "")) "checked" "") />
+        <span class="label-body">Active</span>
+      </label>
+      <label class="radio inline">
+        <input id="filter-show-completed" name="filter-show" type="radio"
+               value="completed" @(if (equal? "completed" (hash-ref attrs "filter-show" "")) "checked" "") />
+        <span class="label-body">Completed</span>
+      </label>
+      <input class="button" type="submit" value="Filter">
+    </form>
+  </div>
+</div>
+<div class="row">
+  <div class="twelve columns">
+    <table class="u-full-width">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Priority</th>
+          <th>User</th>
+          <th>Created</th>
+          <th>Completed</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        @in[obj todos]{
+        <tr>
+          <td>
+            <a href="@(url-for 'show-todo (todo-id obj))">
+              @(h (elide-string (todo-title obj) 40 #:honor-word-boundaries #t))
+            </a>
+          </td>
+          <td>@(format-priority (todo-priority obj))</td>
+          <td>@(user-username (todo-user-obj obj))</td>
+          <td class="index-timestamp">@(~t (todo-created-at obj) "MM/dd/yy HH:mm")</td>
+          <td class="index-timestamp">
+            @(if (todo-completed-at obj)
+               (~t (todo-completed-at obj) "MM/dd/yy HH:mm")
+               "")
+          </td>
+          <td>
+            @(define user (webctx-user ctx))
+            @(when (may? user 'edit obj) @`{
+              <a class="button index-button" href="@,(url-for 'edit-todo (todo-id obj))">Edit</a>
+              &nbsp;&nbsp;&nbsp;
+            })
+            @(when (may? user 'delete obj) @`{
+              <a class="button index-button" href="@,(url-for 'delete-todo (todo-id obj))">Delete</a>
+            })
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

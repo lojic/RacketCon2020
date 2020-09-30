@@ -1,0 +1,40 @@
+@(define user (webctx-user ctx))
+
+<div class="row">
+  <div class="twelve columns">
+    <table class="u-full-width">
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>Email</th>
+          <th>Admin?</th>
+          <th>
+            @(when (may? user 'create 'user) @`{
+              <a class="button-primary button index-button" href="@,(url-for 'create-user)">New User</a>
+            })
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        @in[obj users]{
+        <tr>
+          <td>@(h (user-username obj))</td>
+          <td>@(h (user-email obj))</td>
+          <td>
+            @(if (is-admin? obj) "Yes" "")
+          </td>
+          <td>
+            @(when (may? user 'edit obj) @`{
+              <a class="button index-button" href="@,(url-for 'edit-user (user-id obj))">Edit</a>
+              &nbsp;&nbsp;&nbsp;
+            })
+            @(when (may? user 'delete obj) @`{
+              <a class="button index-button" href="@,(url-for 'delete-user (user-id obj))">Delete</a>
+            })
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

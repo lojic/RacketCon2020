@@ -1,0 +1,30 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head profile="http://www.w3.org/2005/10/profile">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>RacketCon 2020</title>
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="/css/skeleton.css">
+    <link rel="stylesheet" href="/css/main.css?2">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous">
+    </script>
+  </head>
+  <body>
+    @include-template["./_flash.html"]
+    @include-template["./_header.html"]
+    <div class="container">
+      @body
+    </div>
+    <script type="text/javascript">
+      var hideFlash = function() {
+        jQuery('#flash-container').hide();
+      };
+
+      jQuery(function () {
+        window.setTimeout(hideFlash, 3*1000)
+      });
+    </script>
+  </body>
+</html>

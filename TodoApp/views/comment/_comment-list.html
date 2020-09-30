@@ -1,0 +1,20 @@
+@in[comment comments]{
+<div class="row">
+  <div class="twelve columns">
+    <span class="comment-username">@(h (user-username (comment-user-obj comment)))</span>
+    <span class="comment-timestamp">@(~t (comment-created-at comment) "MM/dd/yy HH:mm")</span>
+    @(define user (webctx-user ctx))
+    @(when (may? user 'delete comment) @`{
+    <form accept-charset="UTF-8"
+          class="delete-comment-form"
+       action="@,(url-for 'delete-comment (comment-id comment))"
+       method="post">
+      <input class="button comment-delete-link" type="submit" value="Delete">
+    </form>
+    })
+    <div class="comment-text">
+      @(h (comment-description comment))
+    </div>
+  </div>
+</div>
+}

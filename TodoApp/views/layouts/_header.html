@@ -1,0 +1,28 @@
+@(let ([ user (get-current-user ctx) ])
+   (when user @`{
+<nav class="navbar">
+  <div class="container">
+    <ul class="navbar-list">
+      <li class="navbar-item">
+        <a class="navbar-link" href="@,(url-for 'home)">Home</a>
+      </li>
+      <li class="navbar-item">
+        <a class="navbar-link" href="@,(url-for 'create-todo)">New Todo</a>
+      </li>
+      @,(when (is-admin? user) @`{
+      <li class="navbar-item">
+        <a class="navbar-link" href="@,(url-for 'export-todos)">Export Todos</a>
+      </li>
+      })
+      @,(when (is-admin? user) @`{
+      <li class="navbar-item">
+        <a class="navbar-link" href="@,(url-for 'users)">Users</a>
+      </li>
+      })
+      <li class="navbar-item">
+        <a class="navbar-link" href="@,(url-for 'logout)">Logout (@,(user-username user))</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+}))
