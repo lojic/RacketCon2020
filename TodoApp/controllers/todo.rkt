@@ -35,7 +35,7 @@
 
   (define (handle-post)
     (let* ([ attrs  (webctx-attributes ctx)          ]
-           [ errors (validate-todo-attrs conn attrs) ])
+           [ errors (validate-todo-attrs attrs) ])
       (cond [ (null? errors)
               (create-todo conn (todo-from-attributes (user-id user) attrs #f))
               (axio-redirect (flash-set ctx 'info "Contact created")
@@ -84,7 +84,7 @@
     (let* ([ attrs  (hash-set (webctx-attributes ctx)
                               "id"
                               (todo-id obj))         ]
-           [ errors (validate-todo-attrs conn attrs) ])
+           [ errors (validate-todo-attrs attrs) ])
       (cond [ (null? errors)
               (update-todo conn (todo-from-attributes (user-id user) attrs obj))
               (axio-redirect (flash-set ctx 'info "Todo saved")
@@ -156,7 +156,7 @@
                                "")
              "priority"    (number->string (todo-priority obj))))
 
-(define (validate-todo-attrs conn attrs)
+(define (validate-todo-attrs attrs)
   (define validators
     (list
      (list "title" validate-required
