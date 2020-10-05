@@ -250,14 +250,14 @@
 ;; Setup
 ;; ---------------------------------------------------------------------------------------------
 
-#;(module+ main
+(module+ main
   (define axio-ctx (axio-init 'production))
   (define conn     (axio-context-db-conn axio-ctx))
 
   ;; Create user
   (let* ([ salt (random-string 20) ]
-         [ pswd "sesame"           ]
-         [ user (build-user "barney"
+         [ pswd "rcon10"           ]
+         [ user (build-user "admin"
                             (hash-password pswd salt)
                             salt
                             #:email    "barney@example.com"
