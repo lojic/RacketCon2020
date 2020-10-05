@@ -80,7 +80,7 @@
        (check-false (read-comment conn comment-id))
 
        ;; Delete other records
-       (query-exec conn "delete from todo")
-       (query-exec conn "delete from app_user"))))
+       (todo:delete-todo conn todo-id)
+       (delete-user conn user-id))))
 
   )

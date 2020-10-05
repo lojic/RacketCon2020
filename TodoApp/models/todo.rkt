@@ -330,6 +330,6 @@
        (check-false (read-todo conn todo-id))
 
        ;; Delete user records
-       (query-exec conn "delete from app_user"))))
+       (delete-user conn user-id))))
 
   )
