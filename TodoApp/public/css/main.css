@@ -39,6 +39,12 @@ div.flash-container .flash-message {
   padding: 4px 20px 4px 20px;
 }
 
+div.flash-container .flash-error {
+  background-color: #ffd0d0;
+  border: 3px solid #f0f0f0;
+  padding: 4px 20px 4px 20px;
+}
+
 form.delete-comment-form {
   display: inline;
 }
