@@ -9,7 +9,7 @@
       <li class="navbar-item">
         <a class="navbar-link" href="@,(url-for 'create-todo)">New Todo</a>
       </li>
-      @,(when (is-admin? user) @`{
+      @,(when (may? user 'export 'todos) @`{
       <li class="navbar-item">
         <a class="navbar-link" href="@,(url-for 'export-todos)">Export Todos</a>
       </li>
