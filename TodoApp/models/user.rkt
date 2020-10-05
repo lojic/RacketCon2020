@@ -260,7 +260,7 @@
          [ user (build-user "admin"
                             (hash-password pswd salt)
                             salt
-                            #:email    "barney@example.com"
+                            #:email    "admin@example.com"
                             #:is-admin #t) ])
 
     (create-user conn user)))
