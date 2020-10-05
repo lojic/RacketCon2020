@@ -1,0 +1,11 @@
+[Unit]
+Description=Racket Web App %i
+
+[Service]
+User=deploy
+WorkingDirectory=/home/deploy/RacketCon2020/TodoApp/public/
+ExecStart=/usr/local/bin/racket /home/deploy/RacketCon2020/TodoApp/todo-app.rkt %i
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
