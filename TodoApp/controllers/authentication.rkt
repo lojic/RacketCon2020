@@ -1,6 +1,7 @@
 #lang racket
 
 (require "../axio/axio.rkt"
+         "../permission.rkt"
          "../url-generator.rkt"
          "../models/user.rkt")
 
@@ -32,7 +33,8 @@
               (session-set _ 'userid (user-id user))
               (flash-set _ 'info "Login successful")
               (axio-redirect _ (return-url-or-default attrs "/")))
-          (login-view ctx attrs))))
+          (login-view (flash-set ctx 'error "Invalid credentials")
+                      attrs))))
 
   (if (post-method? ctx)
       (handle-post)

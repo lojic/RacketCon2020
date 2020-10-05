@@ -1,8 +1,9 @@
 <div class="row">
   <h3>Login</h3>
 
-  <form accept-charset="UTF-8" action="/login" method="post">
-    <input name="return-url" type="hidden" value="@(hash-ref attrs "return-url" "")" />
+  <form accept-charset="UTF-8" action="@(url-for 'login)" method="post">
+    <input name="return-url" type="hidden"
+           value="@(hash-ref attrs "return-url" "")" />
     <div class="row">
       <div class="six columns">
         <label for="username">User name:</label>
@@ -12,7 +13,8 @@
     <div class="row">
       <div class="six columns">
         <label for="password">Password:</label>
-        <input class="u-full-width" id="password" name="password" type="password" />
+        <input class="u-full-width" id="password"
+               name="password" type="password" />
       </div>
     </div>
     <input class="button-primary" type="submit" value="Login">
