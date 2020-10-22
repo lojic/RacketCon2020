@@ -15,7 +15,8 @@
          get-app-env
          (struct-out app-env))
 
-(struct app-env (db-database
+(struct app-env (port-base
+                 db-database
                  db-password
                  db-server
                  db-username)
@@ -38,11 +39,13 @@
   (-> symbol? app-env?)
   (match env-type
     [ 'production (app-env
+                   5000
                    "production-database-name"
                    #f
                    "localhost"
                    "production-database-username") ]
     [ 'test       (app-env
+                   5000
                    "test-database-name"
                    #f
                    "localhost"
