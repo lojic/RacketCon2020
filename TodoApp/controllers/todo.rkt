@@ -38,7 +38,7 @@
            [ errors (validate-todo-attrs attrs) ])
       (cond [ (null? errors)
               (create-todo conn (todo-from-attributes (user-id user) attrs #f))
-              (axio-redirect (flash-set ctx 'info "Contact created")
+              (axio-redirect (flash-set ctx 'info "Todo created")
                              (url-for 'home)) ]
             [ else
               (create-view ctx attrs errors) ])))
